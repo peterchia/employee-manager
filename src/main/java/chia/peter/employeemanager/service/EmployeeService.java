@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import chia.peter.employeemanager.exception.UserNotFoundException;
 import chia.peter.employeemanager.model.Employee;
 import chia.peter.employeemanager.repo.EmployeeRepo;
+import jakarta.transaction.Transactional;
 
 @Service
 public class EmployeeService {
@@ -36,6 +37,7 @@ public class EmployeeService {
         return employeeRepo.findEmployeeById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
 
+    @Transactional
     public void deleteEmployee(Long id) {
         employeeRepo.deleteEmployeeById(id);
     }
